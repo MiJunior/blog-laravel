@@ -10,4 +10,13 @@ class Category extends Model
         'name',
         'desc'
     ];
+
+
+    /**
+     * Relationship with 'posts'
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Post', 'post_category');
+    }
 }
