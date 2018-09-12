@@ -31,12 +31,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $newData = $request->only('name', 'content');
-        //if($request->get('file')) {
+        if($request->has('file')) {
             Uploader::file($request->file('file'));
             Uploader::push('storage/fileUpload');
             $fullPath = Uploader::getFullPath();
             $newData['file'] = $fullPath;
-       // }
+        }
         $post = Post::create($newData);
         if($request->input('category_id')):
             $post->categories()->attach($request->input('category_id'));
@@ -64,7 +64,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findorfail($id);
+        return view('post.edit', compact('post'));
     }
 
     /**
