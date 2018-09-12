@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function store(Request $request){
         $newData = $request->all();
         if(!preg_match("^([A-Z][a-zA-Z]+ [A-Z][a-zA-Z]+)$^", $newData['author'])){

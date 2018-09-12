@@ -6,7 +6,7 @@
         <!--Content Form input -->
         <div class="form-group">
             {!! Form::label('Content', 'Content:') !!}
-            {!! Form::text('content', null, ['class'=>'form-control', 'placeholder' => 'Content']) !!}
+            {!! Form::textarea('content', null, ['class'=>'form-control', 'placeholder' => 'Content']) !!}
         </div>
         <!-- select category -->
         <div class="form-group">
