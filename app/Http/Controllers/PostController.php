@@ -49,10 +49,11 @@ class PostController extends Controller
      * @param  int  $postId
      * @return \Illuminate\Http\Response
      */
-    public function show($postId)
+    public function show($id)
     {
-        $post = Post::where('post', $postId)->first();
-        return view('posts.show', compact('post'));
+        $post = Post::where('id', $id)->first();
+        $comments = $post->comments()->orderBy('id','desc')->paginate(5);
+        return view('posts.show', compact('post', 'comments'));
     }
 
     /**
@@ -87,9 +88,9 @@ class PostController extends Controller
         }
         $post->update($newData);
         if($request->input('category_id')):
-            $post->categories()->attach($request->input('category_id'));
+            $post->categories()->attach($request->update('category_id'));
         endif;
-        //return redirect('category');
+        return redirect('category');
     }
 
     /**
@@ -99,7 +100,9 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {  
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('category');
     }
 }

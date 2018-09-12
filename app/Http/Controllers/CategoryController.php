@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
 
@@ -53,7 +54,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::where('id', $id)->first();
+        $posts = $category->posts()->orderBy('id','desc')->paginate(5);
+        $comments = $category->comments()->orderBy('id','desc')->paginate(5);
+        return view('categories.show', compact('category', 'posts', 'comments'));
     }
 
     /**

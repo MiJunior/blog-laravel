@@ -5,7 +5,7 @@
         <!--ID Form input -->
         <div class="form-group">
             {!! Form::label('desc', 'Description:') !!}
-            {!! Form::text('desc', null, ['class'=>'form-control', 'placeholder' => 'Description']) !!}
+            {!! Form::textarea('desc', null, ['class'=>'form-control', 'placeholder' => 'Description']) !!}
         </div>        
         <!-- submit -->
         <div class="form-group">

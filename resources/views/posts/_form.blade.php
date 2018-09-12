@@ -1,14 +1,14 @@
-<!-- Nickname Form input -->
+        <!-- Name Form input -->
         <div class="form-group">
             {!! Form::label('Name', 'Name:') !!}
             {!! Form::text('name', null, ['class'=>'form-control', 'placeholder' => 'Name:']) !!}
         </div>
-        <!--ID Form input -->
+        <!--Content Form input -->
         <div class="form-group">
             {!! Form::label('Content', 'Content:') !!}
             {!! Form::text('content', null, ['class'=>'form-control', 'placeholder' => 'Content']) !!}
         </div>
-        <!-- Ban type Form input -->
+        <!-- select category -->
         <div class="form-group">
             {!! Form::label('Category', 'Select category') !!}
             <select class="form-control" name="category_id">

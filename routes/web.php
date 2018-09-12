@@ -21,4 +21,6 @@ Route::resource('category', 'CategoryController');
 
 Route::resource('post', 'PostController');
 
+Route::resource('comment', 'CommentController');
+
 Route::get('/home', 'HomeController@index')->name('home');
