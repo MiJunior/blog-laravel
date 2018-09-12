@@ -41,6 +41,7 @@ class PostController extends Controller
         if($request->input('category_id')):
             $post->categories()->attach($request->input('category_id'));
         endif;
+        return redirect('category');
     }
 
     /**
