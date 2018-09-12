@@ -18,7 +18,7 @@
         <!-- File input -->
         <div class="form-group">
             {!! Form::label('File', 'Choose a file from your computer (maximum size 2mb)') !!}
-            {!! Form::file('file', null, ['class'=>'custom-file-input']) !!}
+            {!! Form::file('file') !!}
         </div>
         <!-- submit -->
         <div class="form-group">

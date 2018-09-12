@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
-use Carbon\Carbon;
 use Uploader;
 use App\Post;
 use App\Category;
@@ -32,7 +31,7 @@ class PostController extends Controller
     {
         $newData = $request->only('name', 'content');
         if($request->has('file')) {
-            Uploader::file($request->file('file'));
+            $file = Uploader::file($request->file('file'));
             Uploader::push('storage/fileUpload');
             $fullPath = Uploader::getFullPath();
             $newData['file'] = $fullPath;
@@ -64,8 +63,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::findorfail($id);
-        return view('post.edit', compact('post'));
+        $categories = Category::get();
+        $posts = Post::findorfail($id);
+        return view('posts.edit', compact('posts', 'categories'));
     }
 
     /**
@@ -77,7 +77,19 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findorfail($id);
+        $newData = $request->all();
+        if(!empty($newData['file'])) {
+            Uploader::file($newData['file']);
+            Uploader::push('storage/fileUpload');
+            $fullPath = Uploader::getFullPath();
+            $newData['file'] = $fullPath;
+        }
+        $post->update($newData);
+        if($request->input('category_id')):
+            $post->categories()->attach($request->input('category_id'));
+        endif;
+        //return redirect('category');
     }
 
     /**

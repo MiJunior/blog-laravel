@@ -30,4 +30,5 @@ class PostRequest extends FormRequest
             'categories' => 'required'
         ];
     }
+    
 }
