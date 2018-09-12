@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
+use Carbon\Carbon;
+use Uploader;
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
@@ -27,8 +30,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = Post::create($request->all());
-
+        $newData = $request->only('name', 'content');
+        //if($request->get('file')) {
+            Uploader::file($request->file('file'));
+            Uploader::push('storage/fileUpload');
+            $fullPath = Uploader::getFullPath();
+            $newData['file'] = $fullPath;
+       // }
+        $post = Post::create($newData);
         if($request->input('category_id')):
             $post->categories()->attach($request->input('category_id'));
         endif;

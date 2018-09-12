@@ -4,8 +4,46 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ddf86d94e02d3635472e4af3bebc25a",
+    "content-hash": "ad1aa941eace1310fe689077a8cffe4d",
     "packages": [
+        {
+            "name": "almazik/laravel-uploader",
+            "version": "0.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pricecurrent/LaravelUploader.git",
+                "reference": "1f3ca38f52c54e522552f2b97a993454b713bfd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pricecurrent/LaravelUploader/zipball/1f3ca38f52c54e522552f2b97a993454b713bfd1",
+                "reference": "1f3ca38f52c54e522552f2b97a993454b713bfd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Almazik\\LaravelUploader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Almazik",
+                    "email": "code.bright.anywhere@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A package that allows easily handle uploading files to your server from different sources.",
+            "homepage": "https://github.com/pricecurrent/LaravelUploader",
+            "time": "2016-03-16T03:57:38+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",

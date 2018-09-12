@@ -161,6 +161,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //uploader
+        Almazik\LaravelUploader\FileUploaderServiceProvider::class,
 
     ],
 
@@ -213,7 +215,8 @@ return [
         // form collective
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        // uploader
+        'Uploader' => Almazik\LaravelUploader\Facades\Uploader::class,
     ],
 
 ];

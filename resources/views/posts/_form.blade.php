@@ -15,7 +15,11 @@
             @include('posts.part.categories', ['categories' => $categories])
             </select>
         </div>
-        
+        <!-- File input -->
+        <div class="form-group">
+            {!! Form::label('File', 'Choose a file from your computer (maximum size 2mb)') !!}
+            {!! Form::file('file', null, ['class'=>'custom-file-input']) !!}
+        </div>
         <!-- submit -->
         <div class="form-group">
             {!!Form::submit('Submit', ['class' => 'btn btn-primary form-control'])!!}
