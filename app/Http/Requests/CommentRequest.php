@@ -13,7 +13,7 @@ class CommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'author' => 'required|min:2',
+            'author' => 'required|min:2|regex:^([A-Z][a-zA-Z]+ [A-Z][a-zA-Z]+)$^',
             'content' => 'required|min:1'
         ];
     }

@@ -8,10 +8,6 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +38,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $newData = $request->all();
-        Category::create($newData);//заполняем бд
+        Category::create($newData);
         return redirect('category/');
     }
 
@@ -52,9 +48,8 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        $category = Category::where('id', $id)->first();
         $posts = $category->posts()->orderBy('id','desc')->paginate(5);
         $comments = $category->comments()->orderBy('id','desc')->paginate(5);
         return view('categories.show', compact('category', 'posts', 'comments'));
@@ -93,10 +88,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        $categories= Category::findorfail($id);
-        $categories->delete();
+        $category->delete();
         return redirect('category');
     }
 }

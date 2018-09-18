@@ -10,12 +10,6 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +17,7 @@ class PostController extends Controller
      */
     public function create()
     {
-     $categories = Category::get();
+     $categories = Category::pluck('name', 'id');
      return view('posts.create', compact('categories'));
     }
 
@@ -55,9 +49,8 @@ class PostController extends Controller
      * @param  int  $postId
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::where('id', $id)->first();
         $comments = $post->comments()->orderBy('id','desc')->paginate(5);
         return view('posts.show', compact('post', 'comments'));
     }
@@ -105,9 +98,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {  
-        $post = Post::find($id);
         $post->delete();
         return redirect('category');
     }
