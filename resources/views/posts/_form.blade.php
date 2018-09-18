@@ -11,9 +11,8 @@
         <!-- select category -->
         <div class="form-group">
             {!! Form::label('Category', 'Select category') !!}
-            <select class="form-control" name="category_id">
-            @include('posts.part.categories', ['categories' => $categories])
-            </select>
+            {!! Form::select('category_id', $categories, null, ['class' => 'form-control']) !!}
+            
         </div>
         <!-- File input -->
         <div class="form-group">

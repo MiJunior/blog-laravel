@@ -1,37 +1,44 @@
 @extends('layouts.app')
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#commentForm').on('submit', function(e){
+        e.preventDefault();
+ 
+        $.ajax({
+            type: 'POST',
+            url: '/comment',
+            data: $('#commentForm').serialize(),
+            success: function(result){
+                console.log(result);
+            }
+        });
+    });
+});
+</script>
 @section ('content')
     <div class="container">
         <h1><p><?=$post['name']?></p></h1>
-    <h3><p> Content: </p></h2>
+    <h3><p> Content: </p></h3>
     <p><i><?=$post['content']?></i></p>
     <hr>
     <?php foreach($comments as $comment){?>
         <div class="card">
             <div class="card-header">
-            <?=$comment['author']?>
-        </div>
-        <div class="card-body">
-            <blockquote class="blockquote mb-0">
-            <p><?=$comment['content']?></p>
-            <footer class="blockquote-footer">Created at:  <cite title="Created at"><?=$comment['created_at']?></cite></footer>
-            </blockquote>
+                <?=$comment['author']?>
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                <p><?=$comment['content']?></p>
+                <footer class="blockquote-footer">Created at:  <cite title="Created at"><?=$comment['created_at']?></cite></footer>
+                </blockquote>
             </div>
         </div>
-                <p></p>
     <?php } ?>
     {{$comments->render()}}
     <hr>
-    {!! Form::open(['action' => 'CommentController@store']) !!}
+    {!! Form::open(['id' => 'commentForm', 'method' => 'POST']) !!}
         @include('comments._form' ,['name' => 'post_id' , 'id' => $post->id])
     {!! Form::close() !!}
-    @if($errors->any())
-    <div class="alert alert-danger" role="alert">
-    {{$errors->first()}}
-    </div>
-    @endif
-    @if (Session::has('message'))
-    <div class="alert alert-info">{{ Session::get('message') }}</div>
-    @endif
     </div>
 @endsection
