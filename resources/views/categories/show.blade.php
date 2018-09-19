@@ -6,6 +6,7 @@
     }
 
     $(document).ready(function(){
+        $("#successinfo").hide();
         $('#commentForm').on('submit', function(e){
             e.preventDefault();
     
