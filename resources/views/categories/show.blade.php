@@ -1,20 +1,22 @@
 @extends('layouts.app')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-    $('#commentForm').on('submit', function(e){
-        e.preventDefault();
- 
-        $.ajax({
-            type: 'POST',
-            url: '/comment',
-            data: $('#commentForm').serialize(),
-            success: function(result){
-                console.log(result);
-            }
+    function funcSuccess(){
+        $("#successinfo").text("Success");
+    }
+
+    $(document).ready(function(){
+        $('#commentForm').on('submit', function(e){
+            e.preventDefault();
+    
+            $.ajax({
+                type: 'POST',
+                url: '/comment',
+                data: $('#commentForm').serialize(),
+                success: funcSuccess
+            });
         });
     });
-});
 </script>
 @section('content')
     <div class="container">
@@ -55,9 +57,10 @@ $(document).ready(function(){
         {{$comments->render()}}
         <hr>
         {!! Form::open(['id' => 'commentForm', 'method' => 'POST']) !!}
-        {{ csrf_field() }}
+            {{ csrf_field() }}
             @include('comments._form' ,['name' => 'category_id' , 'id' => $category->id])
         {!! Form::close() !!}
+        <div id="successinfo" class="alert alert-success" role="alert"> Status</div>
     </div>
        
 @endsection
