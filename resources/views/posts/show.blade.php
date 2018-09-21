@@ -2,7 +2,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script>
 function funcSuccess(){
-    $("#successinfo").text("Success").show();
+    $("#successinfo").text("Success").addClass("alert alert-success").show();
 }
 $(document).ready(function(){
     $("#successinfo").hide();
@@ -42,6 +42,6 @@ $(document).ready(function(){
         {!! Form::open(['id' => 'commentForm', 'method' => 'POST']) !!}
             @include('comments._form' ,['name' => 'post_id' , 'id' => $post->id])
         {!! Form::close() !!}
-        <div id="successinfo" class="alert alert-success" role="alert"> Status </div>
+        <div id="successinfo" role="alert"></div>
     </div>
 @endsection
